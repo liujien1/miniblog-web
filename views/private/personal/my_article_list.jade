@@ -1,0 +1,18 @@
+input(type="hidden" id="pageIndex" name="pageIndex" value="#{qContext.pageIndex}")
+input(type='hidden' id='totalPage' name="totalPage" value="#{qContext.totalPage}")
+each blog in qContext.result
+    div(class="row col-lg-9 col-md-9 col-sm-9" style="word-break:break-all; word-wrap:break-word ;")
+        a(href="#{basePath}index/getBlog?p=#{blog.id}") #{blog.title}
+        p #{blog.preview}
+        span Posted by&nbsp;
+            a(href="javascript:void(0);") #{blog.author}&nbsp;
+
+            span on #{moment(blog.createTime).format('YYYY-MM-DD HH:mm:ss')}
+        hr(class="col-lg-9 col-md-9 col-sm-9")
+        if (userInfo.id==blog.authorId)
+            p
+                a(href="#{basePath}personal/updateMyArticlePage?id=#{blog.id}") 修改&nbsp;&nbsp;
+                a(href="javascript:void(0);" onclick="base.delete('#{services.blogServicePath}private/personal/deleteMyArticle?id=#{blog.id}')") 删除
+
+nav
+    include ../../common/page.jade

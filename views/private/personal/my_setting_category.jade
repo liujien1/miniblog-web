@@ -1,0 +1,135 @@
+style.
+    a{text-decoration:none;}
+    a:hover {text-decoration: underline}
+script.
+    //添加
+    function addCategory(){
+        var categoryText=$("#addCategoryName").val();
+        if(categoryText==""){
+            base.alert("输入格式不正确！");
+            return;
+        }
+
+        var url="#{services.blogServicePath}private/personal/addCategory";
+        var params={"name":categoryText};
+
+        $.ajax({
+            type: "post",
+            url: url,
+            xhrFields: {
+                withCredentials: true // 携带跨域cookie
+            },
+            data:params,
+            success: function(data) {
+                   if(data.errorCode==0){
+                       location.href=location.href;
+                   }else{
+                       base.alert(data.message);
+                   }
+            }
+        })
+    }
+
+    function updatePre(id,name){
+        $("#updateId").val(id);
+        $("#updateCategoryName").val(name);
+    }
+
+    //修改
+    function updateCategory(){
+        var categoryText=$("#updateCategoryName").val();
+        if(categoryText==""){
+            base.alert("输入格式不正确！");
+            return;
+        }
+
+        var id=$("#updateId").val();
+        var url="#{services.blogServicePath}private/personal/updateCategory";
+        var params={"id":id,"name":categoryText};
+        $.ajax({
+                type: "post",
+                url: url,
+                xhrFields: {
+                    withCredentials: true // 携带跨域cookie
+                },
+                data:params,
+                success: function(data) {
+                       if(data.errorCode==0){
+                           location.href=location.href;
+                       }else{
+                           base.alert(data.message);
+                       }
+                }
+            })
+    }
+
+    //删除
+    function deleteCategory(id){
+        base.confirm("确定删除？",function(){
+
+            var url="#{services.blogServicePath}private/personal/settingCategoryDelete";
+            var params={"id":id};
+
+            $.ajax({
+                type: "delete",
+                url: url,
+                xhrFields: {
+                    withCredentials: true // 携带跨域cookie
+                },
+                data:params,
+                success: function(data) {
+                       if(data.errorCode==0){
+                           location.href=location.href;
+                       }else{
+                           base.alert(data.message);
+                       }
+                }
+            })
+
+
+        })
+
+    }
+hr
+div
+    table(class="table")
+        button(type="button" class="btn btn-default" data-toggle="modal" data-target="#addWin") 添加
+        thead
+            tr
+                th 名称
+                th 操作
+        tbody
+            each item,index in categoryList
+                tr
+                    td #{item.name}
+                    td
+                        span(class="label label-danger" data-toggle="modal" data-target="#updateWin" onclick="updatePre('#{item.id}','#{item.name}')") 重命名
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        span(class="label label-danger" onclick="deleteCategory('#{item.id}');") 删除
+
+
+
+// 新建（Modal）
+div(class="modal fade" id="addWin" tabindex="-1" role="dialog" aria-labelledby="addWinLabel" aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                h4(class="modal-title" id="addWinLabel") 新建标签
+            div(class="modal-body")
+                input(type="text" id="addCategoryName" class="form-control" maxlength="20" required)
+            div(class="modal-footer")
+                button(type="button" class="btn btn-primary" onclick="addCategory();") 保存
+
+// 修改（Modal）
+div(class="modal fade" id="updateWin" tabindex="-1" role="dialog" aria-labelledby="updateWinLabel" aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                h4(class="modal-title") 重命名标签
+            div(class="modal-body")
+                input(type="hidden" id="updateId")
+                input(type="text" id="updateCategoryName" class="form-control" maxlength="20" required)
+            div(class="modal-footer")
+                button(type="button" class="btn btn-primary" onclick="updateCategory();") 保存

@@ -1,0 +1,24 @@
+
+html
+    head
+        title 我的文章
+        include ../../common/base.jade
+    body
+        include ../../common/header.jade
+        script(src='/js/cust/private/myArticle.js')
+        div(class="container main")
+            div(class="row")
+                div(class="col-lg-9 col-md-9 col-sm-9")
+                    div(class="row")
+                        strong(style="padding-left: 10px") 我的文章
+                            br
+                        hr(class="col-lg-9 col-md-9 col-sm-9")
+                    div(id="showBlogs")
+                div(class="col-lg-3 col-md-3 col-sm-3")
+                    div(class="row")
+                        strong(style="padding-left: 10px") 我的标签
+                        br
+                        hr(class="col-lg-3 col-md-3 col-sm-3")
+                    div(id="showMyArticleCategory")
+
+        include ../../common/footer.jade

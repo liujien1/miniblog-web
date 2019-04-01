@@ -1,0 +1,6 @@
+p
+  each item,index in categoryList
+    a(href="javascript:void(0);" onclick="searchByCategory('#{item.id}')") #{item.name}（#{item.num}）
+    br
+p(class="text-right")
+    small

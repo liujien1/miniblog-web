@@ -1,0 +1,49 @@
+header(class="navbar-static-top")
+    nav(class="navbar navbar-default" role="navigation")
+        div(class="container")
+            div(class="navbar-header")
+                a(class="navbar-brand" href="#{indexUrl}") miniblog
+
+            div(class="navbar-collapse" id="bs-example-navbar-collapse-1")
+                ul(class="nav navbar-nav")
+                    li
+                        a(href="#{indexUrl}") 文章
+                    li(class="dropdown")
+                        a(href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                     aria-haspopup="true" aria-expanded="false") 关于我
+                           span(class="caret")
+                        ul(class="dropdown-menu")
+                            li
+                                a(href="https://github.com/jiejie0604") 我的GitHub
+                                   //li(role="separator" class="divider")
+                                   //li
+                                   //     a(href="#{basePath}author/index.html") 我的主页
+                                   //li(role="separator" class="divider")
+                                   //li
+                                   //     a(href="#{modulePath}book/list") 英文书籍
+                form(id="searchForm" class="navbar-form navbar-left" role="search" method="post")
+                    div(class="form-group")
+                        input(id="extendSearch" name="extendSearch" type="text" class="form-control" value=""
+                                                             placeholder="搜索")
+                        &nbsp;&nbsp;
+                        input(id="searchBtn" type="button" class="btn btn-default" value="搜索")
+                if !userInfo
+                    ul(class="nav navbar-nav navbar-right")
+                        li
+                            a(href="#{basePath}user/login") 登录
+                else
+                    ul(class="nav navbar-nav navbar-right")
+                        li(class="dropdown")
+                            a(href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                             aria-haspopup="true" aria-expanded="false") #{userInfo.name}
+                               span(class="caret")
+                            ul(class="dropdown-menu")
+                                li
+                                    a(href="#{basePath}personal/getMyArticlePage") 我的文章
+                                li
+                                    a(href="#{basePath}personal/addMyArticlePage") 写博客
+                                li
+                                    a(href="#{basePath}personal/settingPage") 设置
+                                li(role="separator" class="divider")
+                                li
+                                    a(href="#{basePath}user/logout") 退出

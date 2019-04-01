@@ -1,0 +1,58 @@
+
+html
+    head
+        title blog文章
+        include ../common/base.jade
+    body
+        include ../common/header.jade
+        div(class="container main")
+            div(class="row")
+                div(class="col-lg-12 col-md-12 col-sm-12")
+                    div(class="row")
+                        if blog.categoryName
+                            p 标签：#{blog.categoryName}
+                        div(id="blog_title")
+                            h1 #{blog.title}
+                        div(id="blog_content")
+                            //#{blog.text}
+                        small(class="text-right")
+                            hr(class="row")
+                            p 阅读(#{blog.readCount})
+                                br
+                                Posted by&nbsp;
+                                a(href="javascript:void(0);") #{blog.author}&nbsp;
+
+                                on #{moment(blog.createTime).format('YYYY-MM-DD HH:mm:ss')}
+
+link(rel='stylesheet', href='/js/plugins/editor.md/css/editormd.css')
+link(rel='stylesheet', href='/js/plugins/editor.md/css/editormd.preview.css')
+script(src='/js/plugins/editor.md/lib/marked.min.js')
+script(src='/js/plugins/editor.md/lib/prettify.min.js')
+script(src='/js/plugins/editor.md/lib/raphael.min.js')
+script(src='/js/plugins/editor.md/lib/underscore.min.js')
+script(src='/js/plugins/editor.md/lib/sequence-diagram.min.js')
+script(src='/js/plugins/editor.md/lib/flowchart.min.js')
+script(src='/js/plugins/editor.md/lib/jquery.flowchart.min.js')
+script(src='/js/plugins/editor.md/editormd.js')
+
+script.
+    $.ajax({
+        type: "get",
+        url: "#{services.blogServicePath}public/getBlogText?p=#{blog.id}",
+        xhrFields: {
+            withCredentials: true // 携带跨域cookie
+        },
+        processData: false,
+        success: function(markdown) {
+            editormd.markdownToHTML("blog_content", {
+                        markdown: markdown,
+                        tocm: true,
+                        htmlDecode: "style,script,iframe",  // you can filter tags decode
+                        emoji: true,
+                        taskList: true,
+                        tex: true,  // 默认不解析
+                        flowChart: true,  // 默认不解析
+                        sequenceDiagram: true,  // 默认不解析
+                    });
+        }
+    })

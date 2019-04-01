@@ -1,0 +1,28 @@
+
+meta(name="author" content="liujie.website")
+meta(charset="utf-8")
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+link(rel='icon', href='/img/tuiku.ico' type="image/x-ico")
+link(rel='stylesheet', href='/css/bootstrap.min.css' media="screen")
+link(rel='stylesheet', href='/css/tuiku.css' media="screen")
+link(rel='stylesheet', href='/css/font-awesome-4.4.0/css/font-awesome.min.css')
+script(src='/js/jquery-1.12.3.min.js')
+script(src='/js/html5shiv.min.js')
+script(src='/js/liu.base.js')
+script(src='/js/cust/base.js')
+
+input(type="hidden" id="basePath" value="#{basePath}")
+input(type="hidden" id="servicePath" value="#{servicePath}")
+
+div(class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+    div(class="modal-dialog")
+        div(class="modal-content")
+            div(class="modal-header")
+                botton(type="button" class="close" data-dismiss="modal" aria-hidden="true") x
+                h4(class="modal-title" id="myModalLabel") 确认
+            div(class="modal-body")
+                span(id="confirm-message")
+            div(class="modal-footer")
+                botton(class="btn btn-primary" data-dismiss="modal" id="comfirm-ok") 确定
+                botton(class="btn btn-default" data-dismiss="modal" aria-hidden="true") 取消

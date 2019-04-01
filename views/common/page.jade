@@ -1,0 +1,47 @@
+
+- var curIndex=qContext.pageIndex
+- var pagerRange=5
+- var totalPage=qContext.totalPage
+- var begin=(1>=curIndex-parseInt(pagerRange/2))?1:parseInt(curIndex-pagerRange/2)
+- var end=begin + pagerRange-1<totalPage?begin + pagerRange-1:totalPage
+//p #{begin}
+//p #{end}
+//p #{pagerRange}
+//p #{totalPage}
+//p #{curIndex}
+//- var date=liu.format('format_date',{date:new Date(),dateformat:'yyyy-MM-dd HH:mm:ss'})
+//p #{moment(Date.now()).format('MM/DD/YYYY')}
+
+ul(class="pagination")
+
+    if qContext.totalPage!=0
+        if qContext.pageIndex!=1
+            li
+                a(href="javascript:void(0);" class="page-btn" onclick="goPage(1);") 首页
+            li
+                a(href="javascript:void(0);" class="page-btn" onclick="page('up');") 上一页
+        else
+            li
+                a(href="javascript:void(0);" class="page-btn") 首页
+            li
+                a(href="javascript:void(0);" class="page-btn") 上一页
+
+        - for(var i=begin;i<=end;i++)
+            li
+                a(href="javascript:void(0);"  class="${i==qContext.pageIndex?'page-btn page-btn-cur':'page-btn'}" onclick="goPage(#{i});") #{i}
+
+
+        if qContext.pageIndex!=qContext.totalPage
+            li
+                a(href="javascript:void(0);" class="page-btn" onclick="page('next');") 下一页
+            li
+                a(href="javascript:void(0);" class="page-btn" onclick="goPage('#{qContext.totalPage}');") 末页
+        else
+            li
+                a(href="javascript:void(0);" class="page-btn") 下一页
+            li
+                a(href="javascript:void(0);" class="page-btn") 末页
+    else
+        亲，再怎么找也没有了 :)
+
+//script(src='/js/cust/page.js')

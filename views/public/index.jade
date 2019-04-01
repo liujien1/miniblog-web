@@ -1,0 +1,19 @@
+
+html
+    head
+        title 主页
+        include ../common/base.jade
+    body
+        include ../common/header.jade
+        script(src='/js/cust/public/index.js')
+        div(class="container main")
+            div(class="row")
+                div(class="col-lg-9 col-md-9 col-sm-9")
+                    div(class="row")
+                        strong(style="padding-left: 10px") 最新文章
+                            br
+                        hr(class="col-lg-9 col-md-9 col-sm-9")
+                    div(id="showBlogs")
+                div(class="col-lg-3 col-md-3 col-sm-3")
+                    div(id="showReadTops")
+        include ../common/footer.jade

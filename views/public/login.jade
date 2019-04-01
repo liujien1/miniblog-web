@@ -1,0 +1,35 @@
+html
+    head
+        title 登陆
+        include ../common/base.jade
+        script(src='/js/cust/public/login.js')
+    body
+        include ../common/header.jade
+        input(id="basePath" value="#{basePath}" type="hidden")
+        input(id="userServicePath" value="#{services.userServicePath}" type="hidden")
+        div(class="container main")
+            div(class="row")
+                div(class="col-lg-3 col-md-4 col-sm-3 col-center-block")
+                    div(class="form-signin")
+                        form(id="subform" method="post" action="#{modulePath}dologin")
+                            h4(class="form-signin-heading") 请登录
+                            hr
+                            label(for="username" class="sr-only") 用户名
+                            input(type="text" name="username" id="username" class="form-control input-class" placeholder="用户名" required autofocus)
+                            br
+                            label(for="password" class="sr-only")
+                            input(type="password" name="password" id="password" class="form-control input-class" placeholder="密码" required)
+                            br
+                            if isShowVerifyCode
+                                div(id="verifyCodeDiv")
+                                    label(for="verifyCode" class="sr-only") 验证码
+                                    input(type="verifyCode" name="verifyCode" id="verifyCode" class="form-control input-class" placeholder="验证码" style="display: inline;width:160px;margin-right:20px" required)
+                                    img(src="" id="verifyCodePic")
+                                br
+                            if typeof(code)
+                                p(style="color:red;") #{msg}
+                                br
+                            button(id="loginBtn" class="btn btn-primary btn-block" type="button") 登录
+
+        a(href="#{services.userServicePath}public/wx/doLogin") 微信登陆
+        include ../common/footer.jade
