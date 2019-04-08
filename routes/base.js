@@ -2,14 +2,17 @@ var request=require("request");
 var cookieParser = require('cookie-parser');
 var base = {}
 
-var miniblog="https://www.xyblogs.site";
+//var miniblog="https://www.xyblogs.site";
+var miniblog="http://127.0.0.1:3000";
 
-var ip="www.xyblogs.site"
-//var basePath="http://"+ip+":3000/";
-var basePath="http://"+ip+":38151/";
+
+//var ip="www.xyblogs.com"
+var ip="127.0.0.1"
+//var basePath="http://"+ip+":38151/";
+var basePath="http://"+ip+":3000/";
 //网关接口
-//var servicePath="http://"+ip+":12002/";
-var servicePath="http://"+ip+":38152/";
+//var servicePath="http://"+ip+":38152/";
+var servicePath="http://"+ip+":12002/";
 
 var services={
     userServicePath:servicePath+"service-user/",
